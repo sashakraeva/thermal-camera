@@ -249,7 +249,8 @@ The final thermal video includes:
 - **Hottest (red)** and **coldest (blue)** points highlighted.
 - A **color bar** on the right showing the temperature range:
 
-![Thermal Camera Example](https://via.placeholder.com/800x400?text=Thermal+Camera+Example)
+![Screenshot from 2025-01-21 21-12-05](https://github.com/user-attachments/assets/4d4faacb-536e-4c89-9e9b-58b748790e7e)
+
 
 ---
 
