@@ -1,4 +1,3 @@
-
 # Thermal Camera Setup and Testing Guide
 
 This repository provides **step-by-step instructions** to set up and use a thermal camera (e.g., FLIR Lepton) with the **PureThermal 2 interface board**. It also includes **preliminary exercises** to validate that the hardware and software are correctly configured before running the final project.
@@ -50,31 +49,17 @@ Install the required libraries and dependencies:
 
 ```bash
 sudo apt update
-sudo apt install -y build-essential cmake libusb-1.0-0-dev libjpeg-dev libopencv-dev python3-pip libgtk2.0-dev libgtk-3-dev python3-venv
+sudo apt install -y build-essential cmake libusb-1.0-0-dev libjpeg-dev python3-pip libgtk2.0-dev libgtk-3-dev python3-opencv
 ```
 
 ---
 
-### Step 3: Activate the Virtual Environment
+### Step 3: Clone and Build `libuvc`
 
-A virtual environment has already been created in the `python` directory of this repository. To activate it, run:
-
-```bash
-cd purethermal1-uvc-capture/python
-source thermcam/bin/activate
-```
-
-This ensures all dependencies are properly installed and isolated for this project.
-
----
-
-### Step 4: Use Included `libuvc`
-
-The `libuvc` library is already included in this repository. You do not need to clone or build it separately. The precompiled version is ready to use.
-
-If needed, you can rebuild it by navigating to the `libuvc` directory:
+Clone the `libuvc` repository and build it on your machine:
 
 ```bash
+git clone https://github.com/groupgets/libuvc.git
 cd libuvc
 mkdir build && cd build
 cmake ..
@@ -91,83 +76,16 @@ sudo ldconfig
 
 ---
 
-## Preliminary Exercises
+### Step 4: Activate the Virtual Environment
 
-### **Exercise 1: Verify Camera Connection**
-
-Connect your PureThermal 2 to the computer via USB. Verify the system detects it as a video device:
+A virtual environment has already been created in the `file` directory of this repository. To activate it, run:
 
 ```bash
-ls /dev/video*
-```
-
-**Expected result:** If the camera is correctly connected, you should see something like:
-
-```
-/dev/video0
-```
-
-If no device appears:
-
-- Check the USB connection.
-- Ensure the cable is functioning.
-- Restart your computer and retry the command.
-
----
-
-### **Exercise 2: Test the Camera with `guvcview`**
-
-Use `guvcview` to ensure the camera is working properly:
-
-1. Install `guvcview`:
-   ```bash
-   sudo apt install guvcview
-   ```
-2. Run `guvcview`:
-   ```bash
-   guvcview
-   ```
-
-In the `guvcview` interface:
-
-- Select the correct video device (e.g., `/dev/video0`).
-- You should see the thermal image output.
-
-**Note:** If no image appears, ensure the correct device is selected.
-
----
-
-### **Exercise 3: Run `uvc-deviceinfo.py`**
-
-Navigate to the `python` directory in the repository and activate the virtual environment by running:
-
-```bash
-cd purethermal1-uvc-capture/python
+cd file
 source thermcam/bin/activate
-sudo python3 uvc-deviceinfo.py
 ```
 
-**Expected result:** The script should display details about the camera, such as:
-
-```
-Version gpp: 3.3.26 dsp: 3.3.26
-FLIR part #: b'500-0771-01'
-FLIR serial #: b'^F'
-```
-
----
-
-### **Exercise 4: Test Basic Thermal Streaming**
-
-Run the `uvc-radiometry.py` script to verify the thermal data stream. Navigate to the directory and activate the environment first:
-
-```bash
-cd purethermal1-uvc-capture/python
-source thermcam/bin/activate
-sudo python3 uvc-radiometry.py
-```
-
-**Expected result:** A window should open showing the thermal image in grayscale. If the data stream works correctly, you can proceed to the final project.
+This ensures all dependencies are properly installed and isolated for this project.
 
 ---
 
@@ -178,7 +96,7 @@ sudo python3 uvc-radiometry.py
 The main script for the project is `uvc-radiometry-celsius.py`. Navigate to the directory and activate the environment before running:
 
 ```bash
-cd purethermal1-uvc-capture/python
+cd file
 source thermcam/bin/activate
 sudo python3 uvc-radiometry-celsius.py
 ```
@@ -190,13 +108,13 @@ sudo python3 uvc-radiometry-celsius.py
 - Their temperatures will be displayed in white.
 - A color bar on the right will indicate the temperature range.
 
-Press **`q`** to exit the program.
+Press `` to exit the program.
 
 ---
 
 ## Troubleshooting
 
-### **Issue: `uvc_open error`**
+### **Issue: **``
 
 1. Ensure the camera is properly connected.
 2. Verify detection with:
@@ -215,10 +133,11 @@ If you encounter errors like:
 - *The function is not implemented.*
 - *Cannot query video position.*
 
-Install the necessary GTK dependencies:
+Ensure OpenCV is installed via:
 
 ```bash
-sudo apt install libgtk2.0-dev libgtk-3-dev
+sudo apt update
+sudo apt install python3-opencv
 ```
 
 ---
@@ -229,17 +148,15 @@ sudo apt install libgtk2.0-dev libgtk-3-dev
 thermal-camera-project/
 ├── README.md                   # Documentation
 ├── LICENSE                     # License information
-├── purethermal1-uvc-capture/   # Main directory for scripts and files
-│   ├── README_original.md      # Original README from the PureThermal repository
-│   ├── python/                 # Python scripts for thermal imaging
-│   │   ├── thermcam/           # Virtual environment for the project
-│   │   ├── uvc-deviceinfo.py   # Camera info script
-│   │   ├── uvc-radiometry.py   # Basic thermal data stream
-│   │   └── uvc-radiometry-celsius.py # Final project script
-│   └── libuvc/                 # Library for camera communication
+├── file/                       # Main directory for scripts and virtual environment
+│   ├── thermcam/               # Virtual environment for the project
+│   ├── uvc-deviceinfo.py       # Camera info script
+│   ├── uvc-radiometry.py       # Basic thermal data stream
+│   └── uvc-radiometry-celsius.py # Final project script
 ```
 
 ---
+
 
 ## Example Output
 
@@ -258,7 +175,6 @@ The final thermal video includes:
 
 - [libuvc](https://github.com/groupgets/libuvc)
 - [OpenCV](https://opencv.org/)
-- [purethermal1-uvc-capture](https://github.com/groupgets/purethermal1-uvc-capture)
 
 ## Authors
   - [Clarrainl](https://github.com/Clarrainl)
