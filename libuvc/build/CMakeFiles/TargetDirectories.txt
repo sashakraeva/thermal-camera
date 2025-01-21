@@ -1,8 +1,0 @@
-/home/mau/Desktop/hardware/libuvc/build/CMakeFiles/uvc.dir
-/home/mau/Desktop/hardware/libuvc/build/CMakeFiles/uvcstatic.dir
-/home/mau/Desktop/hardware/libuvc/build/CMakeFiles/edit_cache.dir
-/home/mau/Desktop/hardware/libuvc/build/CMakeFiles/rebuild_cache.dir
-/home/mau/Desktop/hardware/libuvc/build/CMakeFiles/list_install_components.dir
-/home/mau/Desktop/hardware/libuvc/build/CMakeFiles/install.dir
-/home/mau/Desktop/hardware/libuvc/build/CMakeFiles/install/local.dir
-/home/mau/Desktop/hardware/libuvc/build/CMakeFiles/install/strip.dir
