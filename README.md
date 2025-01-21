@@ -261,13 +261,10 @@ The final thermal video includes:
 - [purethermal1-uvc-capture](https://github.com/groupgets/purethermal1-uvc-capture)
 
 ## Authors
-  - [Name](insert linkedin/webpage link) - role
+  - [Clarrainl](https://github.com/Clarrainl)
+  - [j-albo](https://github.com/j-albo)
+  - [Mauweberla](https://github.com/Mauweberla)
 
-## References
-- [K. Albee et al., “A robust observation, planning, and control pipeline for autonomous rendezvous with tumbling targets,” Frontiers in Robotics and AI, vol. 8, p. 234, 2021, doi: 10.3389/frobt.2021.641338.](https://www.frontiersin.org/articles/10.3389/frobt.2021.641338/full)
-
-## Credits
-  - [Name](insert linkedin/webpage link) - role
 
 <!--  DO NOT REMOVE
 -->
