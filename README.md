@@ -108,13 +108,13 @@ sudo python3 uvc-radiometry-celsius.py
 - Their temperatures will be displayed in white.
 - A color bar on the right will indicate the temperature range.
 
-Press `` to exit the program.
+Press `q` to exit the program.
 
 ---
 
 ## Troubleshooting
 
-### **Issue: **``
+### **Issue: **
 
 1. Ensure the camera is properly connected.
 2. Verify detection with:
