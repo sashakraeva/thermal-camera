@@ -197,8 +197,6 @@ This system integrates multiple hardware components:
 
 ## Limitations and Future Improvements
 
-![HARDWARE II_Final_Mau Javi Charlie_Page_14](https://github.com/user-attachments/assets/d86907ca-277d-41e1-b2c2-265a7082e020)
-
 ### Limitations
 - The resolution of the thermal camera limits precision for detailed temperature mapping.
 - Ultrasonic sensors are sensitive to surface inconsistencies, affecting accuracy.
@@ -210,6 +208,8 @@ This system integrates multiple hardware components:
 - Integrate data with mobile or desktop applications for better visualization.
 - Add ambient condition sensors for humidity or other environmental factors.
 - Implement audio alerts to enhance safety during burning.
+
+![HARDWARE II_Final_Mau Javi Charlie_Page_14](https://github.com/user-attachments/assets/d86907ca-277d-41e1-b2c2-265a7082e020)
 
 ---
 
