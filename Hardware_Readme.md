@@ -175,10 +175,6 @@ This system integrates multiple hardware components:
 
 ### Software Overview
 
-![HARDWARE II_Final_Mau Javi Charlie_Page_10](https://github.com/user-attachments/assets/0a7f5c3e-fb7f-4c57-9225-09b55a3cc031)
-![HARDWARE II_Final_Mau Javi Charlie_Page_11](https://github.com/user-attachments/assets/f5421f9b-fef8-42bc-b4f3-9b38471f85a4)
-![HARDWARE II_Final_Mau Javi Charlie_Page_12](https://github.com/user-attachments/assets/a67c52ce-6442-47b0-87dd-df9495f6c821)
-
 **Libraries Used:**
 - **OpenCV & NumPy:** For image processing and numerical computation.
 - **uvctypes:** Communication with the thermal camera.
@@ -192,6 +188,10 @@ This system integrates multiple hardware components:
 - **USB Video Class (UVC):** Streams thermal frames from the PureThermal camera.
 - **HTTP:** ESP32 hosts a server, and Python retrieves distance data in JSON format.
 - **Trigger-Echo:** Ultrasonic sensor sends pulses and calculates distance using timing.
+
+![HARDWARE II_Final_Mau Javi Charlie_Page_10](https://github.com/user-attachments/assets/0a7f5c3e-fb7f-4c57-9225-09b55a3cc031)
+![HARDWARE II_Final_Mau Javi Charlie_Page_11](https://github.com/user-attachments/assets/f5421f9b-fef8-42bc-b4f3-9b38471f85a4)
+![HARDWARE II_Final_Mau Javi Charlie_Page_12](https://github.com/user-attachments/assets/a67c52ce-6442-47b0-87dd-df9495f6c821)
 
 ---
 
