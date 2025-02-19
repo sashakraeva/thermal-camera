@@ -35,14 +35,19 @@ def ktoc(val):
     return (val - 27315) / 100.0
 
 def apply_thermal_color(data):
-    """Generates the thermal image directly."""
-    # Normalize data to 8 bits
-    cv2.normalize(data, data, 0, 65535, cv2.NORM_MINMAX)
-    np.right_shift(data, 8, data)
-    img_gray = np.uint8(data)
+    """Applies thermal colormap to data scaled across full camera temperature range (-10°C to 400°C)."""
+    MIN_TEMP_K = 26315  # -10°C in Kelvin x 100
+    MAX_TEMP_K = 67315  # 400°C in Kelvin x 100
 
-    # Apply thermal colormap
-    img_color = cv2.applyColorMap(img_gray, cv2.COLORMAP_JET)
+    # Clip values to be within camera’s range
+    data = np.clip(data, MIN_TEMP_K, MAX_TEMP_K)
+
+    # Normalize to full camera range
+    data = ((data - MIN_TEMP_K) / (MAX_TEMP_K - MIN_TEMP_K)) * 255
+    data = np.uint8(data)  # Convert to 8-bit for OpenCV colormap
+
+    # Apply colormap
+    img_color = cv2.applyColorMap(data, cv2.COLORMAP_JET)
     return img_color
 
 def add_colorbar(img, min_temp, max_temp):
@@ -50,7 +55,7 @@ def add_colorbar(img, min_temp, max_temp):
     height, width, _ = img.shape
     colorbar_width = 50  # Width of the color bar
 
-    # Create a vertical gradient (red = hot, blue = cold)
+    # Create a vertical gradient from the full camera temperature range
     gradient = np.linspace(255, 0, height, dtype=np.uint8).reshape((height, 1))
     colorbar = cv2.applyColorMap(gradient, cv2.COLORMAP_JET)
 
@@ -59,15 +64,15 @@ def add_colorbar(img, min_temp, max_temp):
     img_with_bar = np.hstack((img, colorbar))
 
     # Add text for minimum and maximum values
-    cv2.putText(img_with_bar, f"{max_temp:.1f}C", (width + 10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1)
-    cv2.putText(img_with_bar, f"{min_temp:.1f}C", (width + 10, height - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1)
+    cv2.putText(img_with_bar, f"{max_temp:.1f}°C", (width + 10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1)
+    cv2.putText(img_with_bar, f"{min_temp:.1f}°C", (width + 10, height - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1)
 
     return img_with_bar
 
 def display_temperature(img, val_k, loc, color=(255, 255, 255)):
     """Displays the temperature in Celsius at the highlighted points with white text."""
     val = ktoc(val_k)
-    cv2.putText(img, "{0:.1f}C".format(val), loc, cv2.FONT_HERSHEY_SIMPLEX, 0.75, color, 2)
+    cv2.putText(img, "{0:.1f}°C".format(val), loc, cv2.FONT_HERSHEY_SIMPLEX, 0.75, color, 2)
     x, y = loc
     cv2.line(img, (x - 2, y), (x + 2, y), color, 1)
     cv2.line(img, (x, y - 2), (x, y + 2), color, 1)

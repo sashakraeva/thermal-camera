@@ -1,6 +1,6 @@
 # Thermal Camera Setup and Testing Guide
 
-This repository provides **step-by-step instructions** to set up and use a thermal camera (e.g., FLIR Lepton) with the **PureThermal 2 interface board**. It also includes **preliminary exercises** to validate that the hardware and software are correctly configured before running the final project.
+This repository provides **step-by-step instructions** to set up and use a thermal camera (e.g., FLIR Lepton) with the **PureThermal 2 interface board**. It also includes **preliminary exercises** to validate that the hardware and software are correctly configured before running the final project. The repository shows also difference between the outcome from the normalisation on the range of detected temperatures and outcome on the range of all possible values from camera. As well this repository provides couple of examples to upply predefined gradients from CV colormaps to make he visualisation as you prefere better for your data collection.
 
 ---
 
@@ -8,7 +8,7 @@ This repository provides **step-by-step instructions** to set up and use a therm
 
 - Real-time thermal video visualization.
 - Highlights the hottest and coldest points in the frame, displaying their temperatures.
-- A side **color bar** shows the temperature range (red = hottest, blue = coldest).
+- A side **color bar** shows the temperature range.
 
 ---
 
@@ -91,15 +91,21 @@ This ensures all dependencies are properly installed and isolated for this proje
 
 ## Running the Final Project
 
-### Step 5: Run the Final Script
+### Step 5: Run the Final Scripts
 
-The main script for the project is `uvc-radiometry-celsius.py`. Navigate to the directory and activate the environment before running:
+#### 5.1 Outcome from the normalisation on the range of detected temperatures
+
+Main script of 5.1 part is `uvc-radiometry-celsius.py`. Navigate to the directory and activate the environment before running:
 
 ```bash
 cd file
 source thermcam/bin/activate
 sudo python3 uvc-radiometry-celsius.py
 ```
+
+**Why normalizing?**
+- 
+- 
 
 **Expected result:**
 
@@ -108,9 +114,35 @@ sudo python3 uvc-radiometry-celsius.py
 - Their temperatures will be displayed in white.
 - A color bar on the right will indicate the temperature range.
 
+![normalized1.PNG](./OUTCOMES/all_values_jet1.PNG)
+
 Press `q` to exit the program.
 
 ---
+
+#### 5.2 Outcome on the range of all possible values from camera
+
+Main script of 5.1 part is `uvc_celsius_gradient_JET.py`. Navigate to the directory and activate the environment before running:
+
+```bash
+cd file
+source thermcam/bin/activate
+sudo python3 uvc-radiometry-celsius.py
+```
+
+**Why not normalizing?**
+- 
+- 
+
+**CV ColorMap**
+To recolor your grayscale images to get a clue about them. OpenCV now comes with various colormaps to enhance the visualization in your computer vision application.
+
+Script `uvc_celsius_gradient_JET.py` shows cv2.COLORMAP_JET color gradient (from blue to red), but you can play around differnet options. There are example files in this repository like:
+- uvc_celsius_gradient_PLASMA.py
+- uvc_celsius_gradient_SPRING.py
+- uvc_celsius_gradient_VIRIDIS.py
+
+But you can also check other available [ColorMaps in OpenCV](https://docs.opencv.org/4.5.4/d3/d50/group__imgproc__colormap.html#gga9a805d8262bcbe273f16be9ea2055a65a61e4747e35b5775ea2ca27ac1484ad94)
 
 ## Troubleshooting
 
@@ -154,20 +186,6 @@ thermal-camera-project/
 │   ├── uvc-radiometry.py       # Basic thermal data stream
 │   └── uvc-radiometry-celsius.py # Final project script
 ```
-
----
-
-
-## Example Output
-
-The final thermal video includes:
-
-- **Real-time thermal visualization**.
-- **Hottest (red)** and **coldest (blue)** points highlighted.
-- A **color bar** on the right showing the temperature range:
-
-![Screenshot from 2025-01-21 21-12-05](https://github.com/user-attachments/assets/4d4faacb-536e-4c89-9e9b-58b748790e7e)
-
 
 ---
 

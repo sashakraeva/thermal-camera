@@ -34,23 +34,32 @@ def ktoc(val):
     """Converts Kelvin to Celsius."""
     return (val - 27315) / 100.0
 
-def apply_thermal_color(data):
-    """Generates the thermal image directly."""
-    # Normalize data to 8 bits
-    cv2.normalize(data, data, 0, 65535, cv2.NORM_MINMAX)
-    np.right_shift(data, 8, data)
-    img_gray = np.uint8(data)
+def apply_thermal_color(data, min_abs_temp=-2, max_abs_temp=50):
+    """Generates the thermal image without normalizing, based on absolute temperature range."""
+    # Convert raw values to Celsius
+    temp_celsius = ktoc(data)
+
+    # Define min and max temperatures for color scaling
+    min_temp = min_abs_temp  # Minimum temperature to be mapped (adjustable)
+    max_temp = max_abs_temp  # Maximum temperature to be mapped (adjustable)
+
+    # Clip temperature values to the defined rangels /dev/video*
+    temp_celsius = np.clip(temp_celsius, min_temp, max_temp)
+
+    # Convert temperature values to 8-bit grayscale (0-255 range)
+    img_gray = np.uint8(255 * (temp_celsius - min_temp) / (max_temp - min_temp))
 
     # Apply thermal colormap
     img_color = cv2.applyColorMap(img_gray, cv2.COLORMAP_JET)
+
     return img_color
 
-def add_colorbar(img, min_temp, max_temp):
-    """Adds a color bar on the right side of the image."""
+def add_colorbar(img, min_abs_temp=-50, max_abs_temp=100):
+    """Adds a color bar on the right side of the image with fixed temperature values."""
     height, width, _ = img.shape
     colorbar_width = 50  # Width of the color bar
 
-    # Create a vertical gradient (red = hot, blue = cold)
+    # Create a vertical gradient
     gradient = np.linspace(255, 0, height, dtype=np.uint8).reshape((height, 1))
     colorbar = cv2.applyColorMap(gradient, cv2.COLORMAP_JET)
 
@@ -58,11 +67,12 @@ def add_colorbar(img, min_temp, max_temp):
     colorbar = cv2.resize(colorbar, (colorbar_width, height))
     img_with_bar = np.hstack((img, colorbar))
 
-    # Add text for minimum and maximum values
-    cv2.putText(img_with_bar, f"{max_temp:.1f}C", (width + 10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1)
-    cv2.putText(img_with_bar, f"{min_temp:.1f}C", (width + 10, height - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1)
+    # Add text for constant min and max temperature values
+    cv2.putText(img_with_bar, f"{max_abs_temp:.1f}C", (width + 10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 225, 0), 1)
+    cv2.putText(img_with_bar, f"{min_abs_temp:.1f}C", (width + 10, height - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 15, 192), 1)
 
     return img_with_bar
+
 
 def display_temperature(img, val_k, loc, color=(255, 255, 255)):
     """Displays the temperature in Celsius at the highlighted points with white text."""
@@ -124,7 +134,7 @@ def main():
                     img = apply_thermal_color(data)  # Generate thermal image
                     display_temperature(img, minVal, minLoc)
                     display_temperature(img, maxVal, maxLoc)
-                    img_with_bar = add_colorbar(img, ktoc(minVal), ktoc(maxVal))
+                    img_with_bar = add_colorbar(img, min_abs_temp=-50, max_abs_temp=100)
                     cv2.imshow('Lepton Radiometry with Highlights and Colorbar', img_with_bar)
 
                     key = cv2.waitKey(1) & 0xFF
