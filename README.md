@@ -1,6 +1,11 @@
 # Thermal Camera Setup and Testing Guide
 
-This repository provides **step-by-step instructions** to set up and use a thermal camera (e.g., FLIR Lepton) with the **PureThermal 2 interface board**. It also includes **preliminary exercises** to validate that the hardware and software are correctly configured before running the final project. The repository shows also difference between the outcome from the normalisation on the range of detected temperatures and outcome on the range of all possible values from camera. As well this repository provides couple of examples to upply predefined gradients from CV colormaps to make he visualisation as you prefere better for your data collection.
+This repository provides step-by-step instructions for setting up and using a thermal camera (e.g., FLIR Lepton) with the PureThermal 2 interface board. It includes preliminary validation exercises to ensure both hardware and software are correctly configured before running the final project. Additionally, this repository demonstrates the difference between:
+
+- Normalization based on the range of detected temperatures (dynamic scaling based on scene conditions).
+- Using the full possible temperature range from the camera (fixed scaling across all frames).
+
+Furthermore, this repository provides multiple examples of applying predefined CV color maps, allowing users to customize thermal visualization for improved data collection.
 
 ---
 
@@ -104,8 +109,9 @@ sudo python3 uvc-radiometry-celsius.py
 ```
 
 **Why normalizing?**
-- 
-- 
+
+- Enhances contrast by dynamically scaling temperature values based on the detected range.
+- Helps highlight subtle temperature variations within the current scene for better differentiation.
 
 **Expected result:**
 
@@ -141,16 +147,18 @@ sudo python3 uvc-radiometry-celsius.py
 ```
 
 **Why not normalizing?**
-- 
-- 
+- Ensures consistency by maintaining a fixed temperature scale across all frames.
+- Useful for comparative analysis when evaluating multiple scenes under different conditions.
+
 
 **CV ColorMap**
 To recolor your grayscale images to get a clue about them. OpenCV now comes with various colormaps to enhance the visualization in your computer vision application.
 
 Script `uvc_celsius_gradient_JET.py` shows cv2.COLORMAP_JET color gradient (from blue to red), but you can play around differnet options. There are example files in this repository like:
-- uvc_celsius_gradient_PLASMA.py
-- uvc_celsius_gradient_SPRING.py
-- uvc_celsius_gradient_VIRIDIS.py
+
+- `uvc_celsius_gradient_PLASMA.py`
+- `uvc_celsius_gradient_SPRING.py`
+- `uvc_celsius_gradient_VIRIDIS.py`
 
 But you can also check other available [ColorMaps in OpenCV](https://docs.opencv.org/4.5.4/d3/d50/group__imgproc__colormap.html#gga9a805d8262bcbe273f16be9ea2055a65a61e4747e35b5775ea2ca27ac1484ad94)
 
@@ -161,21 +169,21 @@ But you can also check other available [ColorMaps in OpenCV](https://docs.opencv
 - Their temperatures will be displayed in white.
 - A color bar on the right will indicate the temperature range.
 
-**uvc_celsius_gradient_JET.py**
+**`uvc_celsius_gradient_JET.py`**
 
 Result 1.1: Person in the frame
 ![all_values_jet1.PNG](./OUTCOMES/all_values_jet1.PNG)
 Result 1.2 Icecream & Lighter & Person in the frame
 ![all_values_jet2.PNG](./OUTCOMES/all_values_jet2.PNG)
 
-**uvc_celsius_gradient_PLASMA.py**
+**`uvc_celsius_gradient_PLASMA.py`**
 
 Result 2.1: Person in the frame
 ![all_values_plasma.PNG](./OUTCOMES/all_values_plasma.PNG)
 Result 2.2 Icecream & Lighter & Person in the frame
 ![all_values_plasma1.PNG](./OUTCOMES/all_values_plasma1.PNG)
 
-**uvc_celsius_gradient_SPRING.py**
+**`uvc_celsius_gradient_SPRING.py`**
 
 Result 2.1: Person in the frame
 ![all_values_spring.PNG](./OUTCOMES/all_values_spring.PNG)
@@ -183,7 +191,7 @@ Result 2.2 Icecream & Lighter & Person in the frame
 ![all_values_spring1.PNG](./OUTCOMES/all_values_spring1.PNG)
 
 
-**uvc_celsius_gradient_VIRIDIS.py**
+**`uvc_celsius_gradient_VIRIDIS.py`**
 
 Result 2.1: Person in the frame
 ![all_values_viridis.PNG](./OUTCOMES/all_values_viridis.PNG)
