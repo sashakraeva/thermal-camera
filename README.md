@@ -114,7 +114,17 @@ sudo python3 uvc-radiometry-celsius.py
 - Their temperatures will be displayed in white.
 - A color bar on the right will indicate the temperature range.
 
-![normalized1.PNG](./OUTCOMES/all_values_jet1.PNG)
+Result 1: Person in the frame
+![normalized1.PNG](./OUTCOMES/normalized1.PNG)
+
+Result 2: Lighter & Person in the frame
+![normalized2.PNG](./OUTCOMES/normalized2.PNG)
+
+Result 3: Icecream & Person in the frame
+![normalized3.PNG](./OUTCOMES/normalized3.PNG)
+
+Result 4: Icecream & Lighter & Person in the frame
+![normalized4.PNG](./OUTCOMES/normalized4.PNG)
 
 Press `q` to exit the program.
 
@@ -143,6 +153,44 @@ Script `uvc_celsius_gradient_JET.py` shows cv2.COLORMAP_JET color gradient (from
 - uvc_celsius_gradient_VIRIDIS.py
 
 But you can also check other available [ColorMaps in OpenCV](https://docs.opencv.org/4.5.4/d3/d50/group__imgproc__colormap.html#gga9a805d8262bcbe273f16be9ea2055a65a61e4747e35b5775ea2ca27ac1484ad94)
+
+**Expected result:**
+
+- The thermal image will be displayed in real-time.
+- The hottest and coldest points will be highlighted in **red** and **blue**, respectively.
+- Their temperatures will be displayed in white.
+- A color bar on the right will indicate the temperature range.
+
+**uvc_celsius_gradient_JET.py**
+
+Result 1.1: Person in the frame
+![all_values_jet1.PNG](./OUTCOMES/all_values_jet1.PNG)
+Result 1.2 Icecream & Lighter & Person in the frame
+![all_values_jet2.PNG](./OUTCOMES/all_values_jet2.PNG)
+
+**uvc_celsius_gradient_PLASMA.py**
+
+Result 2.1: Person in the frame
+![all_values_plasma.PNG](./OUTCOMES/all_values_plasma.PNG)
+Result 2.2 Icecream & Lighter & Person in the frame
+![all_values_plasma1.PNG](./OUTCOMES/all_values_plasma1.PNG)
+
+**uvc_celsius_gradient_SPRING.py**
+
+Result 2.1: Person in the frame
+![all_values_spring.PNG](./OUTCOMES/all_values_spring.PNG)
+Result 2.2 Icecream & Lighter & Person in the frame
+![all_values_spring1.PNG](./OUTCOMES/all_values_spring1.PNG)
+
+
+**uvc_celsius_gradient_VIRIDIS.py**
+
+Result 2.1: Person in the frame
+![all_values_viridis.PNG](./OUTCOMES/all_values_viridis.PNG)
+Result 2.2 Icecream & Lighter & Person in the frame
+![all_values_viridis1.PNG](./OUTCOMES/all_values_viridis1.PNG)
+
+
 
 ## Troubleshooting
 
@@ -182,9 +230,13 @@ thermal-camera-project/
 ├── LICENSE                     # License information
 ├── file/                       # Main directory for scripts and virtual environment
 │   ├── thermcam/               # Virtual environment for the project
+│   ├── uvc_celsius_gradient_JET.py       # All values with JET ColorMap
+│   ├── uvc_celsius_gradient_PLASMA.py       # All values with PLASMA ColorMap
+│   ├── uvc_celsius_gradient_SPRING.py       # All values with SPRING ColorMap
+│   ├── uvc_celsius_gradient_VIRIDIS.py       # All values with VIRIDIS ColorMap
 │   ├── uvc-deviceinfo.py       # Camera info script
 │   ├── uvc-radiometry.py       # Basic thermal data stream
-│   └── uvc-radiometry-celsius.py # Final project script
+│   └── uvc-radiometry-celsius.py # Normalized values
 ```
 
 ---
